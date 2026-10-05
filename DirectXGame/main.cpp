@@ -133,8 +133,6 @@ int WINAPI WinMain(_In_ HINSTANCE, _In_opt_ HINSTANCE, _In_ LPSTR, _In_ int) {
 	// 初期化処理
 	Initialize(L"LE3D_14_タケウチ_ハルカ_溶岩脱出");
 
-
-
 	// DirectXCommonインスタンスの取得
 	DirectXCommon* dxCommon = DirectXCommon::GetInstance();
 	// imguiManagerインスタンスの取得
