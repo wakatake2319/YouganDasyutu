@@ -43,6 +43,10 @@ public:
 
 	bool IsFinished() const { return finished_; }
 
+	// 残り枚数表示
+	void DrawRemainingCoinCount(float x, float y);
+	int ReturnCoins() { return coinNumber_; }
+
 private:
 	// ブロック
 	KamataEngine::Model* modelBlock_ = nullptr;
@@ -122,4 +126,25 @@ private:
 	int stage;
 
 	MapChipType selectedMapChipType_ = MapChipType::kBlock;
+
+	// コインの残り個数を表示するためのUI
+	uint32_t remainingCoinCount_ = 0;
+	Sprite* remainingCoinCountSprite_ = nullptr;
+
+	uint32_t number_ = 0;
+	std::vector<KamataEngine::Sprite*> digits_;
+	int coinNumber_;
+
+	// テクスチャの幅と高さ
+	float texWidth = 1280; // 画像全体の横幅
+	float texHeight = 512; // 画像全体の縦
+
+
+	float cellW_ = 105.6f;
+	float cellH_ = 96.0f;
+	KamataEngine::Vector2 cellSize_ = {cellW_, cellH_};
+
+	// ゴールの出現を知らせるUI
+	uint32_t goalPostUI_ = 0;
+	Sprite* goalPostUISprite_ = nullptr;
 };

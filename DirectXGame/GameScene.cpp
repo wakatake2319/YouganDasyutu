@@ -49,20 +49,25 @@ void GameScene::Initialize() {
 	switch (stage) {
 	case 0:
 		csv = "Resources/map/map1.csv";
+		coinNumber_ = 2;
 		break;
 
 	case 1:
 		csv = "Resources/map/map2.csv";
+		coinNumber_ = 3;
 		break;
 
 	case 2:
 		csv = "Resources/map/map3.csv";
+		coinNumber_ = 4;
 		break;
 	case 3:
 		csv = "Resources/map/map4.csv";
+		coinNumber_ = 6;
 		break;
 	case 4:
 		csv = "Resources/map/map5.csv";
+		coinNumber_ = 7;
 		break;
 	}
 
@@ -123,6 +128,12 @@ void GameScene::Initialize() {
 	goal_model_ = Model::CreateFromOBJ("Goal");
 
 	GenerateGoal();
+	#pragma region ゴールの出現を知らせる
+	goalPostUI_ = TextureManager::Load("UI/GoalPost.png");
+	goalPostUISprite_ = Sprite::Create(goalPostUI_, Vector2(800.0f, 20.0f));
+
+
+	#pragma endregion
 #pragma endregion
 
 #pragma region BGM
@@ -143,6 +154,14 @@ void GameScene::Initialize() {
 #pragma region コイン
 	coin_model_ = Model::CreateFromOBJ("Coin");
 	GenerateCoins();
+
+	remainingCoinCount_ = TextureManager::Load("UI/RequiredCoins.png");
+	remainingCoinCountSprite_ = Sprite::Create(remainingCoinCount_, Vector2(940.0f, 20.0f));
+
+	number_ = TextureManager::Load("UI/Number.png");
+	for (int i = 0; i < 10; i++) {
+		digits_.push_back(Sprite::Create(number_, {0, 0}));
+	}
 #pragma endregion
 
 	// 自キャラの座標を取得
@@ -503,6 +522,9 @@ void GameScene::Update() {
 		isCoinGet_ = true;
 		isLavaStopped_ = true;
 		isLavaStoppedCounter_ = 0.0f;
+		if (coinNumber_ > 0) {
+			coinNumber_--;
+		}
 	}
 
 	// 前フレームの状態を保存
@@ -536,6 +558,7 @@ void GameScene::Update() {
 			isLavaStoppedCounter_ = 0.0f;
 		}
 		break;
+
 	case 3:
 		if (isLavaStoppedCounter_ > 0.5f) {
 			isLavaStopped_ = false;
@@ -543,6 +566,7 @@ void GameScene::Update() {
 			isLavaStoppedCounter_ = 0.0f;
 		}
 		break;
+
 	case 4:
 		if (isLavaStoppedCounter_ > 0.075f) {
 			isLavaStopped_ = false;
@@ -627,8 +651,34 @@ void GameScene::Draw() {
 	}
 	// ゴールの描画
 	if (goal_ && !goal_->IsGet() && isGoalInitialized_) {
-		if (currentGetCoinCount >= 6) {
-			goal_->Draw();
+		switch (stage) {
+		case 0:
+			if (currentGetCoinCount >= 2) {
+				goal_->Draw();
+			}
+			break;
+
+		case 1:
+			if (currentGetCoinCount >= 3) {
+				goal_->Draw();
+			}
+			break;
+
+		case 2:
+			if (currentGetCoinCount >= 4) {
+				goal_->Draw();
+			}
+			break;
+		case 3:
+			if (currentGetCoinCount >= 6) {
+				goal_->Draw();
+			}
+			break;
+		case 4:
+			if (currentGetCoinCount >= 7) {
+				goal_->Draw();
+			}
+			break;
 		}
 	}
 
@@ -659,6 +709,16 @@ void GameScene::Draw() {
 	Sprite::PreDraw();
 
 
+	// ゴールに必要な枚数まで描画
+	if (coinNumber_ > 0) {
+		DrawRemainingCoinCount(1087.5f, 15.0f);
+
+		// 残り枚数表示スプライトの描画
+		remainingCoinCountSprite_->Draw();
+	} else {
+	// ゴールの出現を知らせるスプライトの描画
+	goalPostUISprite_->Draw();
+	}
 	// スプライト描画後処理
 	Sprite::PostDraw();
 
@@ -723,4 +783,32 @@ void GameScene::CheckAllCollisions() {
 		}
 	}
 #pragma endregion
+}
+
+// 残り枚数表示
+void GameScene::DrawRemainingCoinCount(float x, float y) {
+	std::string s = std::to_string(coinNumber_);
+
+	float scale = 1.0f;
+	float digitWidth = cellW_ * scale;
+
+	for (int i = 0; i < s.size(); i++) {
+
+		int num = s[i] - '0';
+
+		//int col = num % 5;
+		//int row = num / 5;
+
+		int index = (num == 0) ? 9 : num - 1;
+
+		float u = index * cellW_;
+		float v = 0.0f;
+
+		digits_[i]->SetTextureRect({u, v}, {cellW_, cellH_});
+
+		digits_[i]->SetSize({cellW_ * scale, cellH_ * scale});
+		digits_[i]->SetPosition({x + i * digitWidth, y});
+
+		digits_[i]->Draw();
+	}
 }
