@@ -27,8 +27,13 @@ void GameScene::Finalize() {
 	delete wall_;
 	delete wall_model_;
 	delete coin_model_;
+	delete goalPostUISprite_;
+	delete remainingCoinCountSprite_;
 	for (Coin* coin : coins_) {
 		delete coin;
+	}
+	for (Enemy* enemy : enemies_) {
+		delete enemy;
 	}
 
 	coins_.clear();
@@ -164,6 +169,21 @@ void GameScene::Initialize() {
 	}
 #pragma endregion
 
+#pragma region 敵
+	// 敵モデル
+	enemy_model_ = Model::CreateFromOBJ("enemy");
+
+	for (int32_t i = 0; i < 2; ++i) {
+		// エネミーの初期化
+		Enemy* newenemy_ = new Enemy;
+		// エネミーの初期位置
+		Vector3 enemyPosition = mapChipField_->GetMapChipPositionByIndex(12 + i * 4, 21);
+		newenemy_->Initialize(enemy_model_, &camera_, enemyPosition);
+
+		enemies_.push_back(newenemy_);
+	}
+#pragma endregion
+
 	// 自キャラの座標を取得
 	const Vector3& deathParticlesPosition = player_->GetWorldPosition();
 	// デスパーティクルの初期化
@@ -254,8 +274,21 @@ void GameScene::GenerateGoal() {
 
 void GameScene::Update() {
 
+	enemies_.remove_if([](Enemy* enemy) {
+		if (enemy->isDeath()) {
+			delete enemy;
+			return true; // 削除対象
+		}
+		return false; // 削除対象ではない
+	});
+
 	// プレイヤーの更新
 	player_->Update();
+
+	// 敵の更新
+	for (Enemy* enemy : enemies_) {
+		enemy->Update();
+	}
 
 	// ゴールの更新
 	if (goal_ && isGoalInitialized_) {
@@ -649,6 +682,11 @@ void GameScene::Draw() {
 	if (!player_->IsDeath()) {
 		player_->Draw();
 	}
+
+	for (Enemy* enemy : enemies_) {
+			enemy->Draw();
+	}
+
 	// ゴールの描画
 	if (goal_ && !goal_->IsGet() && isGoalInitialized_) {
 		switch (stage) {

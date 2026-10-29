@@ -73,13 +73,17 @@ void MapChipField::LoadMapChipCsv(const std::string& filePath) {
 
 // マップチップ種別の取得
 MapChipType MapChipField::GetMapChipTypeByIndex(uint32_t xIndex, uint32_t yIndex) {
-	if (xIndex < 0 || kNumBlockHorizontal - 1 < xIndex) {
-		return MapChipType::kBlank;
-	}
-	if (yIndex < 0 || kNumBlockVirtical - 1 < yIndex) {
+	// 縦方向の範囲チェック
+	if (yIndex >= mapChipData_.data.size()) {
 		return MapChipType::kBlank;
 	}
 
+	// 横方向の範囲チェック
+	if (xIndex >= mapChipData_.data[yIndex].size()) {
+		return MapChipType::kBlank;
+	}
+
+	// 範囲内であればマップチップを返す
 	return mapChipData_.data[yIndex][xIndex];
 }
 
@@ -105,9 +109,24 @@ uint32_t MapChipField::GetNumBlockHorizontal() { return kNumBlockHorizontal; }
 
 MapChipField::IndexSet MapChipField::GetMapChipIndexSetByPosition(const Vector3& position) {
 	IndexSet indexSet = {};
-	indexSet.xIndex = static_cast<uint32_t>((position.x + kBlockWidth / 2.0f) / kBlockWidth);
-	indexSet.yIndex = kNumBlockVirtical - 1 - static_cast<uint32_t>((position.y + kBlockHeight / 2.0f) / kBlockHeight);
+	// マップチップのインデックスを計算
+	int xIndex = static_cast<int>(std::floor((position.x + kBlockWidth / 2.0f) / kBlockWidth));
 
+	int yIndex = static_cast<int>(kNumBlockVirtical) - 1 - static_cast<int>(std::floor((position.y + kBlockHeight / 2.0f) / kBlockHeight));
+
+	// 範囲外の値も呼び出し元で検出できるようにする
+	// IndexSetのメンバがuint32_t型の場合、負の値をそのまま格納しない
+	if (xIndex < 0) {
+		indexSet.xIndex = UINT32_MAX;
+	} else {
+		indexSet.xIndex = static_cast<uint32_t>(xIndex);
+	}
+
+	if (yIndex < 0) {
+		indexSet.yIndex = UINT32_MAX;
+	} else {
+		indexSet.yIndex = static_cast<uint32_t>(yIndex);
+	}
 	return indexSet;
 }
 

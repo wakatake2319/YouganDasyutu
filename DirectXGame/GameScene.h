@@ -10,6 +10,7 @@
 #include "wall.h"
 #include "Coin.h"
 #include "SceneBase.h"
+#include "Enemy.h"
 
 class GameScene : public SceneBase {
 public:
@@ -89,6 +90,11 @@ private:
 	Model* coin_model_ = nullptr;
 	// 動的に生成したコインを格納するコンテナ
 	std::vector<Coin*> coins_;
+
+	// 敵
+	Enemy* enemy_ = nullptr;
+	Model* enemy_model_ = nullptr;
+	std::list<Enemy*> enemies_;
 
 	// カメラコントローラー
 	CameraController* cameraController_ = nullptr;
