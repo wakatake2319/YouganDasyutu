@@ -1,6 +1,8 @@
 #pragma once
 #include "KamataEngine.h"
 #include "MyMath.h"
+#include "CollisionMapInfo.h"
+
 using namespace KamataEngine;
 
 class Player;
@@ -25,7 +27,7 @@ public:
 		knumCorner
 	};
 	// 初期化
-	void Initialize(Model* model, Camera* camera, const Vector3& position);
+	void Initialize(Model* model, Camera* camera, MapChipField* mapchipField, const Vector3& position);
 
 	// 更新
 	void Update();
@@ -66,6 +68,22 @@ public:
 
 	void BehaviorRootUpdate();
 
+	// マップチップとの当たり判定
+	void MapCollision(CollisionMapInfo& info);
+	void MapCollisionDown(CollisionMapInfo& info);
+	void MapCollisionRight(CollisionMapInfo& info);
+	void MapCollisionLeft(CollisionMapInfo& info);
+
+	// 接地判定
+	void isGround(const CollisionMapInfo& info);
+
+	// 角の座標計算
+	Vector3 CornerPosition(const Vector3& center, Corner corner);
+
+	// 進行方向に地面があるかどうかのフラグ
+	bool IsGroundAhead();
+
+
 private:
 	// ワールド変換データ
 	WorldTransform worldTransform_;
@@ -73,6 +91,8 @@ private:
 	Model* model_ = nullptr;
 	// カメラ
 	Camera* camera_ = nullptr;
+	// マップチップフィールド
+	MapChipField* mapchipField_ = nullptr;
 
 	// 歩行の速さ
 	static inline const float kWalkSpeed = 0.01f;
@@ -138,9 +158,7 @@ private:
 	//// 指定した過度の座標計算
 	//Vector3 CornerPosition(const Vector3& center, Corner corner);
 	//
-	//// 当たり判定
-	//MapChipField* mapchipField_ = nullptr;
-	//
+	
 	//// 接地状態の切り替え
 	//void isGround(const CollisionMapInfo& info);
 	//
@@ -149,15 +167,18 @@ private:
 	//
 	//// 着地時の速度減衰率
 	//static inline const float kAttenuationLanding = 0.1f;
-	//// 微小な数値
-	//static inline const float kGroundSearchHeight = 0.06f;
 	//// 壁接触時の速度減衰率
 	//static inline const float kAttenuationWall = 0.2f;
 	//// 接地状態フラグ
-	//bool onGround_ = true;
-	//// ================================
-	//// 敵の当たり判定
-	//// ================================
-	//
-	//static inline const float kBlank = 0.04f;
+	bool onGround_ = true;
+	// ================================
+	// 重力・接地
+	// ================================
+	// 重力加速度
+	static inline const float kGravityAcceleration = 9.8f;
+	// 落下速度の上限
+	static inline const float kLimitFallSpeed = 30.0f;
+	//// 微小な数値
+	static inline const float kGroundSearchHeight = 0.06f;
+	static inline const float kBlank = 0.04f;
 };

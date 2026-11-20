@@ -47,31 +47,31 @@ void GameScene::Initialize() {
 
 #pragma region ステージの取得
 	stage = SceneManager::GetInstance()->GetStage();
-	std::string csv;
+	std::string mapCsv;
 
 	stage = SceneManager::GetInstance()->GetStage();
 
 	switch (stage) {
 	case 0:
-		csv = "Resources/map/map1.csv";
+		mapCsv = "Resources/map/map1.csv";
 		coinNumber_ = 2;
 		break;
 
 	case 1:
-		csv = "Resources/map/map2.csv";
+		mapCsv = "Resources/map/map2.csv";
 		coinNumber_ = 3;
 		break;
 
 	case 2:
-		csv = "Resources/map/map3.csv";
+		mapCsv = "Resources/map/map3.csv";
 		coinNumber_ = 4;
 		break;
 	case 3:
-		csv = "Resources/map/map4.csv";
+		mapCsv = "Resources/map/map4.csv";
 		coinNumber_ = 6;
 		break;
 	case 4:
-		csv = "Resources/map/map5.csv";
+		mapCsv = "Resources/map/map5.csv";
 		coinNumber_ = 7;
 		break;
 	}
@@ -84,7 +84,7 @@ void GameScene::Initialize() {
 	// マップチップの初期化
 	mapChipField_ = new MapChipField;
 	//mapChipField_->LoadMapChipCsv("Resources/blocks.csv");
-	mapChipField_->LoadMapChipCsv(csv);
+	mapChipField_->LoadMapChipCsv(mapCsv);
 	GenerateBlocks();
 #pragma endregion
 
@@ -179,7 +179,7 @@ void GameScene::Initialize() {
 		Enemy* newenemy_ = new Enemy;
 		// エネミーの初期位置
 		Vector3 enemyPosition = mapChipField_->GetMapChipPositionByIndex(12 + i * 4, 21);
-		newenemy_->Initialize(enemy_model_, &camera_, enemyPosition);
+		newenemy_->Initialize(enemy_model_, &camera_, mapChipField_, enemyPosition);
 
 		enemies_.push_back(newenemy_);
 	}
@@ -513,6 +513,14 @@ void GameScene::Update() {
 	ImGui::Begin("PlayerPosition");
 	ImGui::Text("Player Position: (%.2f, %.2f, %.2f)", player_->GetWorldPosition().x, player_->GetWorldPosition().y, player_->GetWorldPosition().z);
 	ImGui::End();
+
+	// 敵の座標を表示するウィンドウ
+	for (Enemy* enemy : enemies_) {
+		ImGui::Begin("Enemy Positions");
+		ImGui::Text("Enemy Position: (%.2f, %.2f, %.2f)", enemy->GetWorldPosition().x, enemy->GetWorldPosition().y, enemy->GetWorldPosition().z);
+		ImGui::End();
+	}
+
 
 #endif
 

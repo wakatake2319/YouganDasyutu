@@ -1,6 +1,7 @@
 #pragma once
 #include "KamataEngine.h"
 #include "MyMath.h"
+#include "CollisionMapInfo.h"
 
 using namespace KamataEngine;
 
@@ -17,21 +18,6 @@ public:
 	enum class LRDirection {
 		kRight,
 		kLeft,
-	};
-
-	// 角
-	enum Corner {
-		// 右下
-		kRightBottom,
-		// 左下
-		kLeftBottom,
-		// 右上
-		kRightTop,
-		// 左上
-		kLeftTop,
-
-		// 要素数
-		knumCorner
 	};
 
 	// ビヘイビア
@@ -203,21 +189,6 @@ private:
 	// 移動処理
 	// ======================
 	void InputMove();
-	// マップチップとの当たり判定情報
-	struct CollisionMapInfo {
-
-		// 天井衝突フラグ
-		bool ceilingCollisionFlag = false;
-
-		// 着地フラグ
-		bool landing = false;
-
-		// 壁接触フラグ
-		bool wallContact = false;
-
-		// 移動量
-		Vector3 move;
-	};
 
 	// 移動量を加味して衝突判定する
 	void MapCollision(CollisionMapInfo& info);
