@@ -11,6 +11,7 @@
 #include "Coin.h"
 #include "SceneBase.h"
 #include "Enemy.h"
+#include "EnemySpawner.h"
 
 class GameScene : public SceneBase {
 public:
@@ -154,4 +155,8 @@ private:
 	// ゴールの出現を知らせるUI
 	uint32_t goalPostUI_ = 0;
 	Sprite* goalPostUISprite_ = nullptr;
+
+	// 敵スポナー
+	EnemySpawner* enemySpawner_ = nullptr;
+
 };

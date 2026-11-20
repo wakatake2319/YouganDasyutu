@@ -63,9 +63,6 @@ public:
 	// 衝突時コールバック
 	void OnHitByAttack();
 
-	// マップチップフィールド
-	//void SetMapChipField(MapChipField* mapchipField) { mapchipField_ = mapchipField; }
-
 	void BehaviorRootUpdate();
 
 	// マップチップとの当たり判定
@@ -83,6 +80,11 @@ public:
 	// 進行方向に地面があるかどうかのフラグ
 	bool IsGroundAhead();
 
+	// 移動方向の設定
+	void SetMoveVector(const Vector3& moveVector);
+
+	// 移動方向の取得
+	void SetPosition(const Vector3& position) { worldTransform_.translation_ = position; }
 
 private:
 	// ワールド変換データ
@@ -132,45 +134,9 @@ private:
 	// 衝突判定無効化
 	bool isCollisionDisabled_ = false;
 
-	//	// マップチップとの当たり判定情報
-	//struct CollisionMapInfo {
-	//
-	//	// 天井衝突フラグ
-	//	bool ceilingCollisionFlag = false;
-	//
-	//	// 着地フラグ
-	//	bool landing = false;
-	//
-	//	// 壁接触フラグ
-	//	bool wallContact = false;
-	//
-	//	// 移動量
-	//	Vector3 move;
-	//};
-	//
-	//// 移動量を加味して衝突判定する
-	//void MapCollision(CollisionMapInfo& info);
-	//void MapCollisionUp(CollisionMapInfo& info);
-	//void MapCollisionDown(CollisionMapInfo& info);
-	//void MapCollisionRight(CollisionMapInfo& info);
-	//void MapCollisionLeft(CollisionMapInfo& info);
-	//
-	//// 指定した過度の座標計算
-	//Vector3 CornerPosition(const Vector3& center, Corner corner);
-	//
-	
-	//// 接地状態の切り替え
-	//void isGround(const CollisionMapInfo& info);
-	//
-	//// 壁接触状態の切り替え
-	//void isWall(const CollisionMapInfo& info);
-	//
-	//// 着地時の速度減衰率
-	//static inline const float kAttenuationLanding = 0.1f;
-	//// 壁接触時の速度減衰率
-	//static inline const float kAttenuationWall = 0.2f;
 	//// 接地状態フラグ
 	bool onGround_ = true;
+
 	// ================================
 	// 重力・接地
 	// ================================

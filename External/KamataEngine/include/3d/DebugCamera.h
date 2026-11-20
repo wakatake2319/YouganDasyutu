@@ -26,7 +26,8 @@ public:
 	/// カメラを取得
 	/// </summary>
 	/// <returns>カメラ</returns>
-	const Camera& GetCamera() { return camera_; }
+	Camera& GetCamera() { return camera_; }
+	const Camera& GetCamera() const { return camera_; }
 
 	/// <summary>
 	/// プロジェクション行列計算用のメンバ設定関数群

@@ -40,3 +40,13 @@ void CameraController::Reset() {
 	// 追従対象とオフセットからカメラの座標を計算
 	camera_->translation_ = targetWorldTransform.translation_ + targetOffset_;
 }
+
+// ステージ全体を見渡せるようにカメラを設定する
+void CameraController::SetCameraToStageView(Camera* targetCamera) {
+	// ステージ全体を見渡せるようにカメラの座標を設定
+	targetCamera->translation_.x = (movableArea_.left + movableArea_.right) / 2.0f;
+	targetCamera->translation_.y = (movableArea_.top + movableArea_.bottom) / 2.0f;
+	targetCamera->translation_.z = -128.0f; // 適切な距離に設定
+	// 行列を更新する
+	targetCamera->UpdateMatrix();
+}

@@ -49,7 +49,7 @@ void GameScene::Initialize() {
 	stage = SceneManager::GetInstance()->GetStage();
 	std::string mapCsv;
 
-	stage = SceneManager::GetInstance()->GetStage();
+	//stage = SceneManager::GetInstance()->GetStage();
 
 	switch (stage) {
 	case 0:
@@ -174,15 +174,36 @@ void GameScene::Initialize() {
 	// 敵モデル
 	enemy_model_ = Model::CreateFromOBJ("enemy");
 
-	for (int32_t i = 0; i < 2; ++i) {
-		// エネミーの初期化
-		Enemy* newenemy_ = new Enemy;
-		// エネミーの初期位置
-		Vector3 enemyPosition = mapChipField_->GetMapChipPositionByIndex(12 + i * 4, 21);
-		newenemy_->Initialize(enemy_model_, &camera_, mapChipField_, enemyPosition);
+	// EnemySpawnerの初期化
+	enemySpawner_ = new EnemySpawner();
+	enemySpawner_->Initialize(enemy_model_, &camera_, mapChipField_, enemies_);
 
-		enemies_.push_back(newenemy_);
+	std::string PopEnemyCsv;
+
+	switch (stage) {
+	case 0:
+		PopEnemyCsv = "Resources/PopEnemy_csv/PopEnemyMap1.csv";
+		break;
+	case 1:
+		PopEnemyCsv = "Resources/PopEnemy_csv/PopEnemyMap2.csv";
+		break;
+	case 2:
+		PopEnemyCsv = "Resources/PopEnemy_csv/PopEnemyMap3.csv";
+		break;
+	case 3:
+		PopEnemyCsv = "Resources/PopEnemy_csv/PopEnemyMap4.csv";
+		break;
+	case 4:
+		PopEnemyCsv = "Resources/PopEnemy_csv/PopEnemyMap5.csv";
+		break;
 	}
+	enemySpawner_->SetEnemyFile(PopEnemyCsv);
+
+	// マップに対応した敵配置CSVを読み込む
+	enemySpawner_->LoadEnemySpawnData(enemySpawner_->GetEnemyFile());
+
+	// CSVの内容から敵を生成
+	enemySpawner_->CreateEnemiesFromSpawnData();
 #pragma endregion
 
 	// 自キャラの座標を取得
@@ -348,21 +369,28 @@ void GameScene::Update() {
 	if (Input::GetInstance()->TriggerKey(DIK_SPACE)) {
 		isDebugCameraActive_ = !isDebugCameraActive_;
 	}
+
 #endif
 
 	// カメラの処理
 	if (isDebugCameraActive_) {
+
+		if (Input::GetInstance()->TriggerKey(DIK_M)) {
+			// カメラをステージ全体見渡せるようにする
+			cameraController_->SetCameraToStageView(&debugCamera_->GetCamera());
+		}
 		//if (Input::GetInstance()->PushKey(DIK_LSHIFT)) {
 			debugCamera_->Update();
 		//}
 		camera_.matView = debugCamera_->GetCamera().matView;
 		camera_.matProjection = debugCamera_->GetCamera().matProjection;
 		camera_.TransferMatrix();
+
 	} else {
 		camera_.UpdateMatrix();
 		cameraController_->Update();
-
-	}
+	} 
+	
 #pragma endregion
 #ifdef _DEBUG
 
@@ -521,6 +549,10 @@ void GameScene::Update() {
 		ImGui::End();
 	}
 
+	enemySpawner_->DrawEnemyEditor();
+
+	// デバックカメラの位置
+	ImGui::Text("Debug Camera Position: (%.2f, %.2f, %.2f)", debugCamera_->GetCamera().translation_.x, debugCamera_->GetCamera().translation_.y, debugCamera_->GetCamera().translation_.z);
 
 #endif
 

@@ -30,6 +30,8 @@ public:
 	// カメラのリセット
 	void Reset();
 
+	void SetCameraToStageView(Camera* targetCamera);
+
 	// カメラ移動範囲
 	void SetMovableArea(Rect area) { movableArea_ = area; }
 

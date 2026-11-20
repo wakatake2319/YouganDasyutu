@@ -419,3 +419,5 @@ bool Enemy::IsGroundAhead() {
 	MapChipType mapChipType = mapchipField_->GetMapChipTypeByIndex(indexSet.xIndex, indexSet.yIndex);
 	return mapChipType == MapChipType::kBlock;
 }
+
+void Enemy::SetMoveVector(const Vector3& moveVector) { velocity_ = moveVector; }

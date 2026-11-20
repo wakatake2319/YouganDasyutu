@@ -179,6 +179,7 @@ xcopy "$(ProjectDir)..\External\KamataEngine\shaders" "$(ProjectDir)Resources\En
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Camera\CameraController.cpp" />
+    <ClCompile Include="Enemy\EnemySpawner.cpp" />
     <ClCompile Include="Object\CoinObject\CoinGetState\CoinGetState.cpp" />
     <ClCompile Include="Object\CoinObject\CoinRootState\CoinRootState.cpp" />
     <ClCompile Include="Scene\Title\TitleStates\GameDescriptionState\GameDescriptionState.cpp" />
@@ -205,6 +206,7 @@ xcopy "$(ProjectDir)..\External\KamataEngine\shaders" "$(ProjectDir)Resources\En
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera\CameraController.h" />
+    <ClInclude Include="Enemy\EnemySpawner.h" />
     <ClInclude Include="MapChip\CollisionMapInfo.h" />
     <ClInclude Include="Object\CoinObject\CoinGetState\CoinGetState.h" />
     <ClInclude Include="Object\CoinObject\CoinRootState\CoinRootState.h" />
