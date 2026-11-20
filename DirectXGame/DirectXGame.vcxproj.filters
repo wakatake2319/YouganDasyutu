@@ -57,7 +57,7 @@
     <ClCompile Include="Object\Wall\wall.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="Object\Coin\Coin.cpp">
+    <ClCompile Include="Object\CoinObject\Coin\Coin.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="Scene\SceneManagre\SceneManager.cpp">
@@ -79,6 +79,12 @@
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="Scene\Title\TitleStates\GameDescriptionState\GameDescriptionState.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\CoinObject\CoinRootState\CoinRootState.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\CoinObject\CoinGetState\CoinGetState.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>
@@ -122,7 +128,7 @@
     <ClInclude Include="Object\Wall\wall.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="Object\Coin\Coin.h">
+    <ClInclude Include="Object\CoinObject\Coin\Coin.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="Scene\SceneManagre\SceneManager.h">
@@ -153,6 +159,15 @@
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="Scene\Title\TitleStates\GameDescriptionState\GameDescriptionState.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\CoinObject\ICoinState\ICoinState.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\CoinObject\CoinRootState\CoinRootState.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\CoinObject\CoinGetState\CoinGetState.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>

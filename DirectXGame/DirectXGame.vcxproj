@@ -84,7 +84,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_WINDOWS;_DEBUG;USE_IMGUI;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)Enemy;$(ProjectDir)Player;$(ProjectDir)Camera;$(ProjectDir)Mapchip;$(ProjectDir)Math;$(ProjectDir)Scene\SceneBase;$(ProjectDir)Scene\SceneManagre;$(ProjectDir)Scene\SceneTransition;$(ProjectDir)Scene\TransitionBase;$(ProjectDir)Scene\GameScene;$(ProjectDir)Scene\GameOver;$(ProjectDir)Scene\Fade;$(ProjectDir)Scene\GameClear;$(ProjectDir)Object\Coin;$(ProjectDir)Object\Goal;$(ProjectDir)Object\Lava;$(ProjectDir)Object\Wall;$(ProjectDir)Object\DeatParticles;$(ProjectDir)Scene\Title\TitleScene;$(ProjectDir)Scene\Title\TitleStates\CreditState;$(ProjectDir)Scene\Title\TitleStates\GameDescriptionState;$(ProjectDir)Scene\Title\TitleStates\ITitleState;$(ProjectDir)Scene\Title\TitleStates\StageSelectState;$(ProjectDir)Scene\Title\TitleStates\TitleMainState;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)Enemy;$(ProjectDir)Player;$(ProjectDir)Camera;$(ProjectDir)Mapchip;$(ProjectDir)Math;$(ProjectDir)Scene\SceneBase;$(ProjectDir)Scene\SceneManagre;$(ProjectDir)Scene\SceneTransition;$(ProjectDir)Scene\TransitionBase;$(ProjectDir)Scene\GameScene;$(ProjectDir)Scene\GameOver;$(ProjectDir)Scene\Fade;$(ProjectDir)Scene\GameClear;$(ProjectDir)Object\CoinObject\Coin;$(ProjectDir)Object\Goal;$(ProjectDir)Object\Lava;$(ProjectDir)Object\Wall;$(ProjectDir)Object\DeatParticles;$(ProjectDir)Scene\Title\TitleScene;$(ProjectDir)Scene\Title\TitleStates\CreditState;$(ProjectDir)Scene\Title\TitleStates\GameDescriptionState;$(ProjectDir)Scene\Title\TitleStates\ITitleState;$(ProjectDir)Scene\Title\TitleStates\StageSelectState;$(ProjectDir)Scene\Title\TitleStates\TitleMainState;$(ProjectDir)Object\CoinObject\CoinGetState;$(ProjectDir)Object\CoinObject\CoinRootState;$(ProjectDir)Object\CoinObject\ICoinState;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
@@ -115,7 +115,7 @@ xcopy "$(ProjectDir)..\External\KamataEngine\shaders" "$(ProjectDir)Resources\En
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_WINDOWS;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)Enemy;$(ProjectDir)Player;$(ProjectDir)Camera;$(ProjectDir)Mapchip;$(ProjectDir)Math;$(ProjectDir)Scene\SceneBase;$(ProjectDir)Scene\SceneManagre;$(ProjectDir)Scene\SceneTransition;$(ProjectDir)Scene\TransitionBase;$(ProjectDir)Scene\GameScene;$(ProjectDir)Scene\GameOver;$(ProjectDir)Scene\Fade;$(ProjectDir)Scene\GameClear;$(ProjectDir)Object\Coin;$(ProjectDir)Object\Goal;$(ProjectDir)Object\Lava;$(ProjectDir)Object\Wall;$(ProjectDir)Object\DeatParticles;$(ProjectDir)Scene\Title\TitleScene;$(ProjectDir)Scene\Title\TitleStates\CreditState;$(ProjectDir)Scene\Title\TitleStates\GameDescriptionState;$(ProjectDir)Scene\Title\TitleStates\ITitleState;$(ProjectDir)Scene\Title\TitleStates\StageSelectState;$(ProjectDir)Scene\Title\TitleStates\TitleMainState;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)Enemy;$(ProjectDir)Player;$(ProjectDir)Camera;$(ProjectDir)Mapchip;$(ProjectDir)Math;$(ProjectDir)Scene\SceneBase;$(ProjectDir)Scene\SceneManagre;$(ProjectDir)Scene\SceneTransition;$(ProjectDir)Scene\TransitionBase;$(ProjectDir)Scene\GameScene;$(ProjectDir)Scene\GameOver;$(ProjectDir)Scene\Fade;$(ProjectDir)Scene\GameClear;$(ProjectDir)Object\CoinObject\Coin;$(ProjectDir)Object\Goal;$(ProjectDir)Object\Lava;$(ProjectDir)Object\Wall;$(ProjectDir)Object\DeatParticles;$(ProjectDir)Scene\Title\TitleScene;$(ProjectDir)Scene\Title\TitleStates\CreditState;$(ProjectDir)Scene\Title\TitleStates\GameDescriptionState;$(ProjectDir)Scene\Title\TitleStates\ITitleState;$(ProjectDir)Scene\Title\TitleStates\StageSelectState;$(ProjectDir)Scene\Title\TitleStates\TitleMainState;$(ProjectDir)Object\CoinObject\CoinGetState;$(ProjectDir)Object\CoinObject\CoinRootState;$(ProjectDir)Object\CoinObject\ICoinState;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <Optimization>MinSpace</Optimization>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
@@ -150,7 +150,7 @@ xcopy "$(ProjectDir)..\External\KamataEngine\shaders" "$(ProjectDir)Resources\En
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_WINDOWS;USE_IMGUI;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)Enemy;$(ProjectDir)Player;$(ProjectDir)Camera;$(ProjectDir)Mapchip;$(ProjectDir)Math;$(ProjectDir)Scene\SceneBase;$(ProjectDir)Scene\SceneManagre;$(ProjectDir)Scene\SceneTransition;$(ProjectDir)Scene\TransitionBase;$(ProjectDir)Scene\GameScene;$(ProjectDir)Scene\GameOver;$(ProjectDir)Scene\Fade;$(ProjectDir)Scene\GameClear;$(ProjectDir)Object\Coin;$(ProjectDir)Object\Goal;$(ProjectDir)Object\Lava;$(ProjectDir)Object\Wall;$(ProjectDir)Object\DeatParticles;$(ProjectDir)Scene\Title\TitleScene;$(ProjectDir)Scene\Title\TitleStates\CreditState;$(ProjectDir)Scene\Title\TitleStates\GameDescriptionState;$(ProjectDir)Scene\Title\TitleStates\ITitleState;$(ProjectDir)Scene\Title\TitleStates\StageSelectState;$(ProjectDir)Scene\Title\TitleStates\TitleMainState;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)Enemy;$(ProjectDir)Player;$(ProjectDir)Camera;$(ProjectDir)Mapchip;$(ProjectDir)Math;$(ProjectDir)Scene\SceneBase;$(ProjectDir)Scene\SceneManagre;$(ProjectDir)Scene\SceneTransition;$(ProjectDir)Scene\TransitionBase;$(ProjectDir)Scene\GameScene;$(ProjectDir)Scene\GameOver;$(ProjectDir)Scene\Fade;$(ProjectDir)Scene\GameClear;$(ProjectDir)Object\CoinObject\Coin;$(ProjectDir)Object\Goal;$(ProjectDir)Object\Lava;$(ProjectDir)Object\Wall;$(ProjectDir)Object\DeatParticles;$(ProjectDir)Scene\Title\TitleScene;$(ProjectDir)Scene\Title\TitleStates\CreditState;$(ProjectDir)Scene\Title\TitleStates\GameDescriptionState;$(ProjectDir)Scene\Title\TitleStates\ITitleState;$(ProjectDir)Scene\Title\TitleStates\StageSelectState;$(ProjectDir)Scene\Title\TitleStates\TitleMainState;$(ProjectDir)Object\CoinObject\CoinGetState;$(ProjectDir)Object\CoinObject\CoinRootState;$(ProjectDir)Object\CoinObject\ICoinState;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <Optimization>Disabled</Optimization>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
@@ -179,10 +179,12 @@ xcopy "$(ProjectDir)..\External\KamataEngine\shaders" "$(ProjectDir)Resources\En
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Camera\CameraController.cpp" />
+    <ClCompile Include="Object\CoinObject\CoinGetState\CoinGetState.cpp" />
+    <ClCompile Include="Object\CoinObject\CoinRootState\CoinRootState.cpp" />
     <ClCompile Include="Scene\Title\TitleStates\GameDescriptionState\GameDescriptionState.cpp" />
     <ClCompile Include="Scene\Title\TitleStates\CreditState\CreditState.cpp" />
     <ClCompile Include="Scene\GameClear\ClearScene.cpp" />
-    <ClCompile Include="Object\Coin\Coin.cpp" />
+    <ClCompile Include="Object\CoinObject\Coin\Coin.cpp" />
     <ClCompile Include="Object\DeatParticles\DeatParticles.cpp" />
     <ClCompile Include="Enemy\Enemy.cpp" />
     <ClCompile Include="Scene\Fade\Fade.cpp" />
@@ -203,10 +205,13 @@ xcopy "$(ProjectDir)..\External\KamataEngine\shaders" "$(ProjectDir)Resources\En
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera\CameraController.h" />
+    <ClInclude Include="Object\CoinObject\CoinGetState\CoinGetState.h" />
+    <ClInclude Include="Object\CoinObject\CoinRootState\CoinRootState.h" />
+    <ClInclude Include="Object\CoinObject\ICoinState\ICoinState.h" />
     <ClInclude Include="Scene\Title\TitleStates\GameDescriptionState\GameDescriptionState.h" />
     <ClInclude Include="Scene\Title\TitleStates\CreditState\CreditState.h" />
     <ClInclude Include="Scene\GameClear\ClearScene.h" />
-    <ClInclude Include="Object\Coin\Coin.h" />
+    <ClInclude Include="Object\CoinObject\Coin\Coin.h" />
     <ClInclude Include="Object\DeatParticles\DeatParticles.h" />
     <ClInclude Include="Enemy\Enemy.h" />
     <ClInclude Include="Scene\Fade\Fade.h" />
