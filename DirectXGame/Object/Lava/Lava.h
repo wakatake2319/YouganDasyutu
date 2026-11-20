@@ -1,6 +1,6 @@
 #pragma once
 #include "KamataEngine.h"
-#include "Math.h"
+#include "MyMath.h"
 
 class Player;
 

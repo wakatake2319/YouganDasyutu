@@ -1,8 +1,16 @@
 #pragma once
 #include "KamataEngine.h"
 #include "SceneBase.h"
+#include "ITitleState.h"
+#include <memory>
 
 using namespace KamataEngine;
+
+//class ITitleState;
+class TitleMainState;
+class CreditState;
+class StageSelectState;
+class GameDescriptionState;
 
 class TitleScene : public SceneBase {
 public:
@@ -22,7 +30,16 @@ public:
 
 	bool IsFinished() const { return finished_; }
 
+	// 状態変更
+	void ChangeState(std::unique_ptr<ITitleState> newState);
+
 private:
+	// 各状態からTitleSceneのメンバーにアクセスする
+	friend class TitleMainState;
+	friend class CreditState;
+	friend class StageSelectState;
+	friend class GameDescriptionState;
+
 	static inline const float kTimeTitleMove = 0.5f;
 
 	// ビュープロジェクション
@@ -44,17 +61,14 @@ private:
 
 	// ステージの横にだす右矢印
 	uint32_t RightArrowTH_ = 0;
-	// ステージの横にだす右矢印スプライト
 	Sprite* RightArrowSprite_ = nullptr;
 
 	// ステージの横にだす左矢印
 	uint32_t LeftArrowTH_ = 0;
-	// ステージの横にだす左矢印スプライト
 	Sprite* LeftArrowSprite_ = nullptr;
 
 	// セレクトステージのロゴ
 	uint32_t selectStageLogoTH_ = 0;
-	// セレクトステージのロゴスプライト
 	Sprite* selectStageLogoSprite_ = nullptr;
 
 	// ゲームの説明
@@ -63,18 +77,19 @@ private:
 
 	float counter_ = 0.0f;
 
-	// ステージ選択の時に連続で同じキーを押さないようにするためのカウンター
+	// ステージ選択の入力制限用カウンター
 	float inputCounter_ = 0.0f;
 
 	// 終了フラグ
 	bool finished_ = false;
 
-	// シーン切り替え中かどうか
+	// シーン切り替え中か
 	bool isSceneChanging_ = false;
 
 	// 選択中ステージ
 	int stageIndex_ = 0;
 	static const int kMaxStage = 5;
+
 	// 次に表示するステージ
 	int nextStage_ = 0;
 
@@ -88,27 +103,11 @@ private:
 	const float kSlideDuration_ = 20.0f;
 
 	// スライド方向
-	int slideDirection_ = 1; // 右:1 左:-1
+	int slideDirection_ = 1;
 
 	// ステージ画像
-	uint32_t stageTH_[kMaxStage];
-	// ステージ画像スプライト
-	KamataEngine::Sprite* stageSprites_[kMaxStage];
-
-	// フェード
-	//Fade* fade_ = nullptr;
-
-	// 現在のフェード
-	//Phase phase_ = Phase::kFadeIn;
-
-	// タイトルの状態
-	enum class TitleState {
-		Title,  // 通常
-		Credit, // クレジット
-		StageSelect, // ステージセレクト
-		GameDescription, // ゲーム説明
-	};
-	TitleState titleState_ = TitleState::Title;
+	uint32_t stageTH_[kMaxStage]{};
+	Sprite* stageSprites_[kMaxStage]{};
 
 	// BGM
 	uint32_t BGMHandle_ = 0;
@@ -117,4 +116,7 @@ private:
 	// SE
 	uint32_t SEHandle_ = 0;
 	uint32_t SEAudioHandle_ = 0;
+
+	// 現在の状態
+	std::unique_ptr<ITitleState> currentState_;
 };

@@ -1,11 +1,11 @@
 #pragma once
 #include "KamataEngine.h"
-#include "Math.h"
+#include "MyMath.h"
 using namespace KamataEngine;
 
 class Player;
 
-class Goal {
+class Coin {
 
 public:
 	// 初期化
@@ -54,8 +54,6 @@ private:
 
 	// 歩行の速さ
 	static inline const float kWalkSpeed = 0.02f;
-	// 速度
-	Vector3 velocity_ = {};
 
 	// ===================
 	// アニメーション
@@ -91,4 +89,8 @@ private:
 	Vector3 basePosition_;
 
 	bool isFinished_ = false;
+
+	// SE
+	uint32_t SEHandle_ = 0;
+	uint32_t SEAudioHandle_ = 0;
 };

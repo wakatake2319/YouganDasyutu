@@ -84,7 +84,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_WINDOWS;_DEBUG;USE_IMGUI;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)Enemy;$(ProjectDir)Player;$(ProjectDir)Camera;$(ProjectDir)Mapchip;$(ProjectDir)Math;$(ProjectDir)Scene\SceneBase;$(ProjectDir)Scene\SceneManagre;$(ProjectDir)Scene\SceneTransition;$(ProjectDir)Scene\TransitionBase;$(ProjectDir)Scene\GameScene;$(ProjectDir)Scene\GameOver;$(ProjectDir)Scene\Fade;$(ProjectDir)Scene\GameClear;$(ProjectDir)Object\Coin;$(ProjectDir)Object\Goal;$(ProjectDir)Object\Lava;$(ProjectDir)Object\Wall;$(ProjectDir)Object\DeatParticles;$(ProjectDir)Scene\Title\TitleScene;$(ProjectDir)Scene\Title\TitleStates\CreditState;$(ProjectDir)Scene\Title\TitleStates\GameDescriptionState;$(ProjectDir)Scene\Title\TitleStates\ITitleState;$(ProjectDir)Scene\Title\TitleStates\StageSelectState;$(ProjectDir)Scene\Title\TitleStates\TitleMainState;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
@@ -115,7 +115,7 @@ xcopy "$(ProjectDir)..\External\KamataEngine\shaders" "$(ProjectDir)Resources\En
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_WINDOWS;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)Enemy;$(ProjectDir)Player;$(ProjectDir)Camera;$(ProjectDir)Mapchip;$(ProjectDir)Math;$(ProjectDir)Scene\SceneBase;$(ProjectDir)Scene\SceneManagre;$(ProjectDir)Scene\SceneTransition;$(ProjectDir)Scene\TransitionBase;$(ProjectDir)Scene\GameScene;$(ProjectDir)Scene\GameOver;$(ProjectDir)Scene\Fade;$(ProjectDir)Scene\GameClear;$(ProjectDir)Object\Coin;$(ProjectDir)Object\Goal;$(ProjectDir)Object\Lava;$(ProjectDir)Object\Wall;$(ProjectDir)Object\DeatParticles;$(ProjectDir)Scene\Title\TitleScene;$(ProjectDir)Scene\Title\TitleStates\CreditState;$(ProjectDir)Scene\Title\TitleStates\GameDescriptionState;$(ProjectDir)Scene\Title\TitleStates\ITitleState;$(ProjectDir)Scene\Title\TitleStates\StageSelectState;$(ProjectDir)Scene\Title\TitleStates\TitleMainState;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <Optimization>MinSpace</Optimization>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
@@ -150,7 +150,7 @@ xcopy "$(ProjectDir)..\External\KamataEngine\shaders" "$(ProjectDir)Resources\En
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_WINDOWS;USE_IMGUI;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)Enemy;$(ProjectDir)Player;$(ProjectDir)Camera;$(ProjectDir)Mapchip;$(ProjectDir)Math;$(ProjectDir)Scene\SceneBase;$(ProjectDir)Scene\SceneManagre;$(ProjectDir)Scene\SceneTransition;$(ProjectDir)Scene\TransitionBase;$(ProjectDir)Scene\GameScene;$(ProjectDir)Scene\GameOver;$(ProjectDir)Scene\Fade;$(ProjectDir)Scene\GameClear;$(ProjectDir)Object\Coin;$(ProjectDir)Object\Goal;$(ProjectDir)Object\Lava;$(ProjectDir)Object\Wall;$(ProjectDir)Object\DeatParticles;$(ProjectDir)Scene\Title\TitleScene;$(ProjectDir)Scene\Title\TitleStates\CreditState;$(ProjectDir)Scene\Title\TitleStates\GameDescriptionState;$(ProjectDir)Scene\Title\TitleStates\ITitleState;$(ProjectDir)Scene\Title\TitleStates\StageSelectState;$(ProjectDir)Scene\Title\TitleStates\TitleMainState;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <Optimization>Disabled</Optimization>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
@@ -178,45 +178,54 @@ xcopy "$(ProjectDir)..\External\KamataEngine\shaders" "$(ProjectDir)Resources\En
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="CameraController.cpp" />
-    <ClCompile Include="ClearScene.cpp" />
-    <ClCompile Include="Coin.cpp" />
-    <ClCompile Include="DeatParticles.cpp" />
-    <ClCompile Include="Enemy.cpp" />
-    <ClCompile Include="Fade.cpp" />
-    <ClCompile Include="GameOverScene.cpp" />
-    <ClCompile Include="GameScene.cpp" />
-    <ClCompile Include="Goal.cpp" />
+    <ClCompile Include="Camera\CameraController.cpp" />
+    <ClCompile Include="Scene\Title\TitleStates\GameDescriptionState\GameDescriptionState.cpp" />
+    <ClCompile Include="Scene\Title\TitleStates\CreditState\CreditState.cpp" />
+    <ClCompile Include="Scene\GameClear\ClearScene.cpp" />
+    <ClCompile Include="Object\Coin\Coin.cpp" />
+    <ClCompile Include="Object\DeatParticles\DeatParticles.cpp" />
+    <ClCompile Include="Enemy\Enemy.cpp" />
+    <ClCompile Include="Scene\Fade\Fade.cpp" />
+    <ClCompile Include="Scene\GameOver\GameOverScene.cpp" />
+    <ClCompile Include="Scene\GameScene\GameScene.cpp" />
+    <ClCompile Include="Object\Goal\Goal.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="MapChipField.cpp" />
-    <ClCompile Include="Math.cpp" />
-    <ClCompile Include="Player.cpp" />
-    <ClCompile Include="SceneManager.cpp" />
-    <ClCompile Include="SceneTransition.cpp" />
-    <ClCompile Include="TitleScene.cpp" />
-    <ClCompile Include="Lava.cpp" />
-    <ClCompile Include="wall.cpp" />
+    <ClCompile Include="MapChip\MapChipField.cpp" />
+    <ClCompile Include="Math\MyMath.cpp" />
+    <ClCompile Include="Player\Player.cpp" />
+    <ClCompile Include="Scene\SceneManagre\SceneManager.cpp" />
+    <ClCompile Include="Scene\SceneTransition\SceneTransition.cpp" />
+    <ClCompile Include="Scene\Title\TitleScene\TitleScene.cpp" />
+    <ClCompile Include="Object\Lava\Lava.cpp" />
+    <ClCompile Include="Object\Wall\wall.cpp" />
+    <ClCompile Include="Scene\Title\TitleStates\TitleMainState\TitleMainState.cpp" />
+    <ClCompile Include="Scene\Title\TitleStates\StageSelectState\StageSelectState.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="CameraController.h" />
-    <ClInclude Include="ClearScene.h" />
-    <ClInclude Include="Coin.h" />
-    <ClInclude Include="DeatParticles.h" />
-    <ClInclude Include="Enemy.h" />
-    <ClInclude Include="Fade.h" />
-    <ClInclude Include="GameOverScene.h" />
-    <ClInclude Include="GameScene.h" />
-    <ClInclude Include="Goal.h" />
-    <ClInclude Include="MapChipField.h" />
-    <ClInclude Include="Math.h" />
-    <ClInclude Include="Player.h" />
-    <ClInclude Include="SceneBase.h" />
-    <ClInclude Include="SceneManager.h" />
-    <ClInclude Include="SceneTransition.h" />
-    <ClInclude Include="TitleScene.h" />
-    <ClInclude Include="TransitionBase.h" />
-    <ClInclude Include="Lava.h" />
-    <ClInclude Include="wall.h" />
+    <ClInclude Include="Camera\CameraController.h" />
+    <ClInclude Include="Scene\Title\TitleStates\GameDescriptionState\GameDescriptionState.h" />
+    <ClInclude Include="Scene\Title\TitleStates\CreditState\CreditState.h" />
+    <ClInclude Include="Scene\GameClear\ClearScene.h" />
+    <ClInclude Include="Object\Coin\Coin.h" />
+    <ClInclude Include="Object\DeatParticles\DeatParticles.h" />
+    <ClInclude Include="Enemy\Enemy.h" />
+    <ClInclude Include="Scene\Fade\Fade.h" />
+    <ClInclude Include="Scene\GameOver\GameOverScene.h" />
+    <ClInclude Include="Scene\GameScene\GameScene.h" />
+    <ClInclude Include="Object\Goal\Goal.h" />
+    <ClInclude Include="Scene\Title\TitleStates\ITitleState\ITitleState.h" />
+    <ClInclude Include="MapChip\MapChipField.h" />
+    <ClInclude Include="Math\MyMath.h" />
+    <ClInclude Include="Player\Player.h" />
+    <ClInclude Include="Scene\SceneBase\SceneBase.h" />
+    <ClInclude Include="Scene\SceneManagre\SceneManager.h" />
+    <ClInclude Include="Scene\SceneTransition\SceneTransition.h" />
+    <ClInclude Include="Scene\Title\TitleScene\TitleScene.h" />
+    <ClInclude Include="Scene\TransitionBase\TransitionBase.h" />
+    <ClInclude Include="Object\Lava\Lava.h" />
+    <ClInclude Include="Object\Wall\wall.h" />
+    <ClInclude Include="Scene\Title\TitleStates\TitleMainState\TitleMainState.h" />
+    <ClInclude Include="Scene\Title\TitleStates\StageSelectState\StageSelectState.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

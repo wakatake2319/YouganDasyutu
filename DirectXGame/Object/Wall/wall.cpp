@@ -1,5 +1,5 @@
 #include "wall.h"
-#include "Math.h"
+#include "MyMath.h"
 #include <numbers>
 
 // 初期化
