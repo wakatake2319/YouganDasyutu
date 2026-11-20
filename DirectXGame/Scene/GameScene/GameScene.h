@@ -66,6 +66,7 @@ private:
 	// プレイヤー
 	Player* player_;
 	Model* player_model_ = nullptr;
+	Model* player_attack_model_ = nullptr;
 
 	// 溶岩
 	Lava* lava_;

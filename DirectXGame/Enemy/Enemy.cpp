@@ -98,8 +98,7 @@ AABB Enemy::GetAABB() {
 	return aabb;
 }
 
-//void Enemy::OnCollision(const Player* player) {
-void Enemy::OnCollision() {
+void Enemy::OnCollision(const Player* player) {
 
 	// デスフラグを立てる
 	isDeath_ = true;
@@ -108,11 +107,11 @@ void Enemy::OnCollision() {
 		return;
 	}
 	// プレイヤーが攻撃中なら敵が死ぬ
-	//if (player->IsAttack()) {
-	//
-	//	// 衝突無効化
-	//	behaviorRequest_ = Behavior::kDeath;
-	//}
+	if (player->IsAttack()) {
+	
+		// 衝突無効化
+		behaviorRequest_ = Behavior::kDeath;
+	}
 }
 
 void Enemy::OnHitByAttack() {

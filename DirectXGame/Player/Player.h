@@ -9,6 +9,7 @@ class MapChipField;
 class Goal;
 class Lava;
 class Coin;
+class Enemy;
 
 class Player {
 public:
@@ -39,10 +40,24 @@ public:
 		kUnknown = -1,
 		// 通常状態
 		kRoot,
+		// 攻撃中
+		kAttack,
+	};
+
+	// 攻撃フェーズ
+	enum class AttackPhase {
+		// 未定義
+		kUnknown = -1,
+		// 溜め
+		kAnticipation,
+		// 攻撃
+		kAction,
+		// 余韻
+		kRecovery,
 	};
 
 	// 初期化
-	void Initialize(Model* model, Camera* camera, const Vector3& position);
+	void Initialize(Model* model, Model* modelAttack, Camera* camera, const Vector3& position);
 
 	// 更新
 	void Update();
@@ -90,6 +105,9 @@ public:
 	// 溶岩と当たった時にデスフラグを取る
 	void OnCollisionLava(const Lava* lava);
 
+	// 敵と当たった時にデスフラグを取る
+	void OnCollisionEnemy(const Enemy* enemy);
+
 	// デスフラグのgetter
 	bool IsDeath() const { return isDeath_; }
 #pragma endregion
@@ -97,8 +115,28 @@ public:
 	// 通常行動更新
 	void BehaviorRootUpdate();
 
+	// 攻撃行動更新
+	void BehaviorAttackUpdate();
+
 	// 通常行動初期化
 	void BehaviorRootInitialize();
+
+	// 攻撃行動初期化
+	void BehaviorAttackInitialize();
+
+	// 攻撃しているかどうか
+	bool IsAttack() const { return behavior_ == Behavior::kAttack && attackPhase_ == AttackPhase::kAction; }
+
+	// 攻撃判定ボックスの更新
+	void UpdateAttackHitBox();
+
+	// 攻撃当たり判定ボックス
+	AABB attackHitBox_;
+	bool isAttackHitBoxActive_ = false;
+
+	bool IsAttackHitActive() const;
+	const AABB& GetAttackAABB() const;
+	void DisableAttackHit();
 
 private:
 	// ワールド変換データ
@@ -225,10 +263,36 @@ private:
 	// 次の振る舞いのリクエスト
 	Behavior behaviorRequest_ = Behavior::kUnknown;
 
+	// ================================
+	// 行動カウンター
+	// ================================
+	// 攻撃ギミックの経過時間カウンター
+	uint32_t attackParameter_ = 0;
+
+	// 攻撃フェーズ
+	AttackPhase attackPhase_ = AttackPhase::kUnknown;
+	// 予備動作の時間
+	static inline const uint32_t kAnticipationTime = 8;
+	// 前進動作の時間
+	static inline const uint32_t kActionTime = 5;
+	// 余韻動作の時間
+	static inline const uint32_t kRecoveryTime = 12;
+	// 攻撃のクールタイム　保留
+	// static inline const int kAttackCoolTime = 30;
+	// int attackCoolTime = 0;
+
 	// モデル
 	Model* model_ = nullptr;
 	// テクスチャハンドル
 	// uint32_t textureHandle_ = 0u;
 	// カメラ
 	Camera* camera_;
+
+	// 攻撃エフェクト
+	Model* modelAttack_ = nullptr;
+	WorldTransform worldTransformAttack_;
+
+	// 攻撃時にのけぞる
+	float attackRecoilX_ = 0.0f;
+	float baseRotationX_ = 0.0f;
 };

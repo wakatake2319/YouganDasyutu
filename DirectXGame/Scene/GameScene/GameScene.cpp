@@ -93,10 +93,11 @@ void GameScene::Initialize() {
 	player_ = new Player();
 	// プレイヤーのモデル
 	player_model_ = Model::CreateFromOBJ("player");
+	player_attack_model_ = Model::CreateFromOBJ("attack_effect");
 	Vector3 playerPosition = mapChipField_->GetMapChipPositionByIndex(2, 6);
 
 	player_->SetMapChipField(mapChipField_);
-	player_->Initialize(player_model_, &camera_, playerPosition);
+	player_->Initialize(player_model_, player_attack_model_, &camera_, playerPosition);
 #pragma endregion
 
 #pragma region 溶岩の初期化
@@ -769,6 +770,25 @@ void GameScene::CheckAllCollisions() {
 		// 自キャラの座標
 		aabb1 = player_->GetAABB();
 
+		// 自キャラと敵弾全ての当たり判定
+		for (Enemy* enemy : enemies_) {
+
+			if (enemy->IsCollisionDisabled())
+				// 衝突判定を行わない
+				continue;
+
+			// 敵弾の座標
+			aabb2 = enemy->GetAABB();
+
+			// AABB同士の交差判定
+			if (IsCollision(aabb1, aabb2)) {
+				// 自キャラの衝突時コールバックを呼び出す
+				player_->OnCollisionEnemy(enemy);
+				// 敵弾の衝突時コールバックを呼び出す
+				enemy->OnCollision(player_);
+			}
+		}
+
 		// ==============================
 		// 自キャラと鍵の当たり判定
 		// ==============================
@@ -819,6 +839,26 @@ void GameScene::CheckAllCollisions() {
 				}
 			}
 		}
+
+		{
+			// 攻撃中でなければ何もしない
+			if (player_->IsAttackHitActive()) {
+
+				// 攻撃判定のAABB
+				AABB attackAABB = player_->GetAttackAABB();
+
+				for (Enemy* enemy : enemies_) {
+
+					if (enemy->IsCollisionDisabled())
+						continue;
+
+					if (IsCollision(attackAABB, enemy->GetAABB())) {
+						enemy->OnHitByAttack();
+					}
+				}
+			}
+		}
+
 	}
 #pragma endregion
 }

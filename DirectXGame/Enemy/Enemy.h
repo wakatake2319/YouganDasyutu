@@ -40,7 +40,7 @@ public:
 	AABB GetAABB();
 
 	// 衝突判定
-	void OnCollision();
+	void OnCollision(const Player* player);
 
 	// デスしたかどうか
 	bool isDeath() const { return isDeath_; }
