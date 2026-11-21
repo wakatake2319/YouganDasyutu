@@ -12,6 +12,7 @@
 #include "SceneBase.h"
 #include "Enemy.h"
 #include "EnemySpawner.h"
+#include "NormalEnemyFactory.h"
 
 class GameScene : public SceneBase {
 public:
@@ -158,5 +159,8 @@ private:
 
 	// 敵スポナー
 	EnemySpawner* enemySpawner_ = nullptr;
+
+	// 敵工場
+	NormalEnemyFactory* normalEnemyFactory_ = nullptr;
 
 };

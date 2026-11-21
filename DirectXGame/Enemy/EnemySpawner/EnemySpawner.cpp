@@ -88,13 +88,19 @@ void EnemySpawner::CreateEnemiesFromSpawnData() {
 
 	enemies_->clear();
 
+	// Factoryが設定されているか確認
+	if (enemyFactory_ == nullptr) {
+		return;
+	}
+
 	for (const EnemySpawnData& data : enemySpawnData_) {
 
-		Enemy* newEnemy = new Enemy();
+		//Enemy* newEnemy = new Enemy();
 
-		newEnemy->Initialize(modelEnemy_, camera_, mapchipField_, Vector3(data.position.x, data.position.y, data.position.z));
+		//newEnemy->Initialize(modelEnemy_, camera_, mapchipField_, Vector3(data.position.x, data.position.y, data.position.z));
 
-		newEnemy->SetPosition(data.position);
+		Enemy * newEnemy = enemyFactory_->CreateEnemy(modelEnemy_, camera_, mapchipField_, data.position);
+		//newEnemy->SetPosition(data.position);
 		newEnemy->SetMoveVector(data.moveVector);
 
 		enemies_->push_back(newEnemy);
@@ -188,3 +194,4 @@ void EnemySpawner::DrawEnemyEditor() {
 void EnemySpawner::SetEnemyFile(const string& filePath) { currentEnemyFile_ = filePath; }
 
 const string& EnemySpawner::GetEnemyFile() const { return currentEnemyFile_; }
+void EnemySpawner::SetEnemyFactory(EnemyFactoryBase* factory) { enemyFactory_ = factory; }

@@ -35,6 +35,17 @@ void GameScene::Finalize() {
 	for (Enemy* enemy : enemies_) {
 		delete enemy;
 	}
+	delete enemySpawner_;
+	// digits_に含まれるポインタを適切に解放するループ処理
+	for (Sprite* digit : digits_) {
+		delete digit;
+	}
+	
+	// new で生成したオブジェクトは、不要になったときに delete する
+	if (normalEnemyFactory_) {
+		delete normalEnemyFactory_;
+		normalEnemyFactory_ = nullptr;
+	}
 
 	coins_.clear();
 }
@@ -177,6 +188,12 @@ void GameScene::Initialize() {
 	// EnemySpawnerの初期化
 	enemySpawner_ = new EnemySpawner();
 	enemySpawner_->Initialize(enemy_model_, &camera_, mapChipField_, enemies_);
+
+	// 敵工場の初期化
+	normalEnemyFactory_ = new NormalEnemyFactory();
+
+	// 敵工場をEnemySpawnerに設定
+	enemySpawner_->SetEnemyFactory(normalEnemyFactory_);
 
 	std::string PopEnemyCsv;
 
@@ -379,9 +396,9 @@ void GameScene::Update() {
 			// カメラをステージ全体見渡せるようにする
 			cameraController_->SetCameraToStageView(&debugCamera_->GetCamera());
 		}
-		//if (Input::GetInstance()->PushKey(DIK_LSHIFT)) {
+		if (Input::GetInstance()->PushKey(DIK_LSHIFT)) {
 			debugCamera_->Update();
-		//}
+		}
 		camera_.matView = debugCamera_->GetCamera().matView;
 		camera_.matProjection = debugCamera_->GetCamera().matProjection;
 		camera_.TransferMatrix();
@@ -553,7 +570,8 @@ void GameScene::Update() {
 
 	// デバックカメラの位置
 	ImGui::Text("Debug Camera Position: (%.2f, %.2f, %.2f)", debugCamera_->GetCamera().translation_.x, debugCamera_->GetCamera().translation_.y, debugCamera_->GetCamera().translation_.z);
-
+	// デバックカメラの角度
+	ImGui::Text("Debug Camera Rotate: (%.2f, %.2f, %.2f)", debugCamera_->GetCamera().rotation_.x, debugCamera_->GetCamera().rotation_.y, debugCamera_->GetCamera().rotation_.z);
 #endif
 
 	// ブロックの更新

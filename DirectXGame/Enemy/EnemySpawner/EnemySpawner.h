@@ -5,7 +5,7 @@
 #include "Enemy.h"
 #include "KamataEngine.h"
 #include "Player.h"
-
+#include "EnemyFactoryBase.h"
 #include <list>
 #include <sstream>
 #include <string>
@@ -50,6 +50,9 @@ public:
 	// 敵配置のゲッター
 	const std::string& GetEnemyFile() const;
 
+	// 敵配置データのセッター
+	void SetEnemyFactory(EnemyFactoryBase* factory);
+
 private:
 	// POP処理
 	void ExecutePop(std::stringstream& lineStream);
@@ -81,4 +84,5 @@ private:
 	MapChipField* mapchipField_ = nullptr;
 	
 	std::string currentEnemyFile_;
+	EnemyFactoryBase* enemyFactory_ = nullptr;
 };
